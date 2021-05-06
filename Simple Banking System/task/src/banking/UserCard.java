@@ -1,10 +1,6 @@
 package banking;
 
-import java.util.Scanner;
-
 public class UserCard {
-
-     Random_generator generator = new Random_generator();
      private String cardNumber;
      private int pinNumber;
      private long balance;
@@ -24,10 +20,10 @@ public class UserCard {
      }
 
      public void setCardNumber() {
-        this.cardNumber = generator.cardNumber();
+        this.cardNumber = Random_generator.cardNumber();
      }
      public void setPinNumber() {
-        this.pinNumber = generator.pinNumber();
+        this.pinNumber = Random_generator.pinNumber();
      }
 
     public long getBalance() {
@@ -38,14 +34,6 @@ public class UserCard {
         this.balance = balance;
     }
 
-    static boolean cardDataVerification(Scanner scanner, UserCard card) {
-         System.out.println("Enter your card number:");
-         String tempCardNumber = scanner.nextLine();
-         System.out.println("Enter your PIN:");
-         int tempPin = Integer.parseInt(scanner.nextLine());
 
-         return card.getCardNumber().equals(tempCardNumber) &&
-                 card.getPinNumber() == tempPin;
-     }
 
  }
