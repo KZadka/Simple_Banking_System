@@ -20,7 +20,7 @@ public class UserCard {
      }
 
      public void setCardNumber() {
-        this.cardNumber = Random_generator.cardNumber();
+        this.cardNumber = Random_generator.checksum();
      }
      public void setPinNumber() {
         this.pinNumber = Random_generator.pinNumber();
@@ -33,7 +33,5 @@ public class UserCard {
     public void setBalance(long balance) {
         this.balance = balance;
     }
-
-
 
  }
