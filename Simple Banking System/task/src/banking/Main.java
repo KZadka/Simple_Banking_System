@@ -1,11 +1,13 @@
 package banking;
 
-
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
+        NewTable.createNewDatabase(args[1]);
+        Connect.connect();
+        NewTable.createNewTable();
 
         Scanner scanner = new Scanner(System.in);
         UserVerification userVerification = new UserVerification();
@@ -34,9 +36,11 @@ public class Main {
     }
 
     static void creatingAccount(UserCard card) {
+        InsertApp app = new InsertApp();
+        app.insert(card.getCardNumber(), card.getPinNumber(), 0);
         System.out.println("Your card has been created");
         System.out.printf("Your card number:%n" + card.getCardNumber());
-        System.out.printf("%nYour card PIN:%n%d%n", card.getPinNumber());
+        System.out.printf("%nYour card PIN:%n%s%n", card.getPinNumber());
     }
 
     static void loggedMenu(UserCard card, Scanner scanner) {
@@ -57,4 +61,5 @@ public class Main {
                 System.exit(0);
         }
     }
+
 }

@@ -33,7 +33,7 @@ public class Random_generator {
         return cardNumber + checkSum;
     }
 
-    static int pinNumber() {
-        return  (int) Math.floor(Math.random() * 9000) + 1000;
+    static String pinNumber() {
+        return  String.valueOf((int) Math.floor(Math.random() * 9000) + 1000);
     }
 }

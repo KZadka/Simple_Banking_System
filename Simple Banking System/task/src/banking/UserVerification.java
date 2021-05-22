@@ -19,10 +19,10 @@ public class UserVerification {
         String tempCardNumber = scanner.nextLine();
         System.out.println(card.getCardNumber());
         System.out.println("Enter your PIN:");
-        int tempPin = Integer.parseInt(scanner.nextLine());
+        String tempPin = scanner.nextLine();
         System.out.println(card.getPinNumber());
 
         return tempCardNumber.equals(card.getCardNumber()) &&
-                tempPin == card.getPinNumber();
+                tempPin.equals(card.getPinNumber());
     }
 }

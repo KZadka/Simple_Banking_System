@@ -2,7 +2,7 @@ package banking;
 
 public class UserCard {
      private String cardNumber;
-     private int pinNumber;
+     private String pinNumber;
      private long balance;
 
     UserCard() {
@@ -15,7 +15,7 @@ public class UserCard {
          return cardNumber;
      }
 
-     public int getPinNumber() {
+     public String getPinNumber() {
          return pinNumber;
      }
 
