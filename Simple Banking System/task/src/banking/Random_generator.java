@@ -33,6 +33,11 @@ public class Random_generator {
         return cardNumber + checkSum;
     }
 
+    static boolean luhnAlgCheck (String cardNumber) {
+
+        return false;
+    }
+
     static String pinNumber() {
         return  String.valueOf((int) Math.floor(Math.random() * 9000) + 1000);
     }

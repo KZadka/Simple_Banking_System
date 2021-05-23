@@ -18,7 +18,7 @@ public class InsertApp {
         return con;
     }
 
-    public void insert (String number, String pin, int balance) {
+    public void insertNewAccount (String number, String pin, int balance) {
         String sql = "INSERT INTO card (number, pin, balance) VALUES (?, ?, ?)";
 
         try (Connection con = this.connect();
@@ -26,6 +26,48 @@ public class InsertApp {
             pstmt.setString(1, number);
             pstmt.setString(2, pin);
             pstmt.setInt(3, balance);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void updateIncome (int balance, String cardNumber) {
+        String sql = "UPDATE card SET balance = balance + ? "
+                    + "WHERE number = ?";
+
+        try (Connection con = this.connect();
+             PreparedStatement pstmt = con.prepareStatement(sql)) {
+            pstmt.setInt(1, balance);
+            pstmt.setString(2, cardNumber);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void transfer (String targetCardNumber, String userCardNumber, int amount) {
+
+
+        String sqlTransferFrom = "UPDATE card SET balance = balance - ? "
+                    + "WHERE number = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareCall(sqlTransferFrom)) {
+            pstmt.setInt(1, amount);
+            pstmt.setString(2, userCardNumber);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        String sqlTransferTo = "UPDATE card SET balance = balance + ? "
+                    + "WHERE number = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sqlTransferTo)) {
+            pstmt.setInt(1, amount);
+            pstmt.setString(2, targetCardNumber);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
