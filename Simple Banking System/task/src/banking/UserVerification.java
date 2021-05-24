@@ -27,13 +27,14 @@ public class UserVerification {
     }
 
     boolean cardVerificationForTransfer(String targetCardNumber, String userCardNumber) {
-        if (!(Random_generator.luhnAlgCheck(targetCardNumber))) {
+        QuerryApp app = new QuerryApp();
+        if (Random_generator.luhnAlgCheck(targetCardNumber)) {
             System.out.println("Probably you made a mistake in the card number. Please try again!");
             return false;
         } else if (targetCardNumber.equals(userCardNumber)) {
             System.out.println("You can't transfer money to the same account!");
             return false;
-        } else if () {//DB cardNumber check
+        } else if (!(app.isCardNumber(targetCardNumber))) {
             System.out.println("Such a card does not exist.");
             return false;
         }

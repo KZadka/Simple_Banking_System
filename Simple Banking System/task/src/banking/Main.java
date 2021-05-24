@@ -68,7 +68,7 @@ public class Main {
                 UserVerification verification = new UserVerification();
                 System.out.println("Transfer");
                 System.out.println("Enter card number: ");
-                String targetCardNumber = scanner.nextLine();
+                String targetCardNumber = scanner.next();
                 if (verification.cardVerificationForTransfer(targetCardNumber, card.getCardNumber())) {
                     System.out.println("Enter how much money you want to transfer: ");
                     int amount = scanner.nextInt();

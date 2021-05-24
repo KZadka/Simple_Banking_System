@@ -32,4 +32,22 @@ public class QuerryApp {
         }
     }
 
+    public boolean isCardNumber (String cardNumber) {
+        String sql = "SELECT EXISTS (SELECT  1 FROM card "
+                + "WHERE number = ?)";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setObject(1, cardNumber);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
 }

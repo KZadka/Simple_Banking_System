@@ -8,8 +8,7 @@ public class Random_generator {
         return "400000".concat(String.valueOf(identifier));
     }
 
-    static String checksum() {
-        String cardNumber = firstDigitsOfCardNum();
+    static String checksum(String cardNumber) {
         int sum = 0;
         int checkSum = 0;
 
@@ -33,9 +32,9 @@ public class Random_generator {
         return cardNumber + checkSum;
     }
 
-    static boolean luhnAlgCheck (String cardNumber) {
-
-        return false;
+    static boolean luhnAlgCheck (String targetCardNumber) {
+        String cardNumber = targetCardNumber.substring(0, targetCardNumber.length() - 2);
+        return checksum(cardNumber).equals(targetCardNumber);
     }
 
     static String pinNumber() {

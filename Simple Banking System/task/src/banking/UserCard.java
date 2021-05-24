@@ -20,7 +20,7 @@ public class UserCard {
      }
 
      public void setCardNumber() {
-        this.cardNumber = Random_generator.checksum();
+        this.cardNumber = Random_generator.checksum(Random_generator.firstDigitsOfCardNum());
      }
      public void setPinNumber() {
         this.pinNumber = Random_generator.pinNumber();
