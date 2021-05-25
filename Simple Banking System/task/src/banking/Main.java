@@ -51,11 +51,11 @@ public class Main {
         System.out.println("5. Log out");
         System.out.println("0. Exit");
         int userInput = scanner.nextInt();
-        QuerryApp app = new QuerryApp();
+        QuerryApp appQ = new QuerryApp();
         InsertApp appI = new InsertApp();
         switch (userInput) {
             case 1:
-                System.out.print("Balance: "); app.showBalance(card.getCardNumber());
+                System.out.print("Balance: "); appQ.showBalance(card.getCardNumber());
                 loggedMenu(card, scanner);
                 break;
             case 2:
@@ -72,7 +72,12 @@ public class Main {
                 if (verification.cardVerificationForTransfer(targetCardNumber, card.getCardNumber())) {
                     System.out.println("Enter how much money you want to transfer: ");
                     int amount = scanner.nextInt();
-                    appI.transfer(targetCardNumber, card.getCardNumber(), amount);
+                    if (appQ.balanceVerification(amount, card.getCardNumber())) {
+                        appI.transfer(targetCardNumber, card.getCardNumber(), amount);
+                    } else {
+                        System.out.println("Not enough money!");
+                        break;
+                    }
                     loggedMenu(card, scanner);
                 } else {
                     verification.cardVerificationForTransfer(targetCardNumber, card.getCardNumber());
@@ -80,6 +85,9 @@ public class Main {
                 }
                 break;
             case 4:
+                DeleteApp appD = new DeleteApp();
+                appD.deletingAccount(card.getCardNumber());
+                System.out.println("The account has been closed!");
                 break;
             case 5:
                 System.out.println("You have successfully logged out!");

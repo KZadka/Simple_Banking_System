@@ -50,4 +50,22 @@ public class QuerryApp {
         return false;
     }
 
+    public boolean balanceVerification (int amount, String cardNumber) {
+        String sql = "SELECT balance FROM card "
+                + "WHERE number = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setObject(1, cardNumber);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("balance") >= amount;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
 }
