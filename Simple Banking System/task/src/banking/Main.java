@@ -6,26 +6,28 @@ public class Main {
 
     public static void main(String[] args) {
         NewTable.createNewDatabase(args[1]);
-        Connect.connect();
+        //Connect.connect();
         NewTable.createNewTable();
 
         Scanner scanner = new Scanner(System.in);
         UserVerification userVerification = new UserVerification();
-        UserCard  card = null;
+        //UserCard  card = null;
+        //String cardNumber = "";
         while (true) {
             System.out.println("1. Create an account");
             System.out.println("2. Log into account");
             System.out.println("0. Exit");
+
 
             int userChoice = scanner.nextInt();
             switch (userChoice) {
                 case 1:
                     UserCard newCard = new UserCard();
                     creatingAccount(newCard);
-                    card = newCard;
+                    //card = newCard;
                     break;
                 case 2:
-                    userVerification.logging(card);
+                    userVerification.logging();
                     break;
                 case 0:
                     System.out.println("Bye!");
@@ -43,50 +45,49 @@ public class Main {
         System.out.printf("%nYour card PIN:%n%s%n", card.getPinNumber());
     }
 
-    static void loggedMenu(UserCard card, Scanner scanner) {
+    static void loggedMenu(String cardNumber) {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("1. Balance");
         System.out.println("2. Add income");
         System.out.println("3. Do transfer");
         System.out.println("4. Close account");
         System.out.println("5. Log out");
         System.out.println("0. Exit");
-        int userInput = scanner.nextInt();
-        QuerryApp appQ = new QuerryApp();
+        String userInput = scanner.nextLine();
+        QueryApp appQ = new QueryApp();
         InsertApp appI = new InsertApp();
-        switch (userInput) {
+        switch (Integer.parseInt(userInput)) {
             case 1:
-                System.out.print("Balance: "); appQ.showBalance(card.getCardNumber());
-                loggedMenu(card, scanner);
+                System.out.println("Balance: " + appQ.showBalance(cardNumber));
+                loggedMenu(cardNumber);
                 break;
             case 2:
                 System.out.println("Enter income: ");
                 int income = scanner.nextInt();
-                appI.updateIncome(income, card.getCardNumber());
-                loggedMenu(card, scanner);
+                appI.updateIncome(income, cardNumber);
+                loggedMenu(cardNumber);
                 break;
             case 3:
                 UserVerification verification = new UserVerification();
                 System.out.println("Transfer");
                 System.out.println("Enter card number: ");
-                String targetCardNumber = scanner.next();
-                if (verification.cardVerificationForTransfer(targetCardNumber, card.getCardNumber())) {
+                String targetCardNumber = scanner.nextLine();
+                if (verification.cardVerificationForTransfer(targetCardNumber, cardNumber)) {
                     System.out.println("Enter how much money you want to transfer: ");
                     int amount = scanner.nextInt();
-                    if (appQ.balanceVerification(amount, card.getCardNumber())) {
-                        appI.transfer(targetCardNumber, card.getCardNumber(), amount);
+                    if (appQ.balanceVerification(amount, cardNumber)) {
+                        appI.transfer(targetCardNumber, cardNumber, amount);
                     } else {
                         System.out.println("Not enough money!");
+                        loggedMenu(cardNumber);
                         break;
                     }
-                    loggedMenu(card, scanner);
-                } else {
-                    verification.cardVerificationForTransfer(targetCardNumber, card.getCardNumber());
-                    loggedMenu(card, scanner);
                 }
+                loggedMenu(cardNumber);
                 break;
             case 4:
                 DeleteApp appD = new DeleteApp();
-                appD.deletingAccount(card.getCardNumber());
+                appD.deletingAccount(cardNumber);
                 System.out.println("The account has been closed!");
                 break;
             case 5:

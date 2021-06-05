@@ -29,11 +29,12 @@ public class Random_generator {
                 checkSum++;
             }
         }
-        return cardNumber + checkSum;
+        return cardNumber.concat(String.valueOf(checkSum));
     }
 
     static boolean luhnAlgCheck (String targetCardNumber) {
-        String cardNumber = targetCardNumber.substring(0, targetCardNumber.length() - 2);
+        String cardNumber = targetCardNumber.substring(0, targetCardNumber.length() - 1);
+
         return checksum(cardNumber).equals(targetCardNumber);
     }
 
