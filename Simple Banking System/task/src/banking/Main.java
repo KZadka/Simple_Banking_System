@@ -6,13 +6,10 @@ public class Main {
 
     public static void main(String[] args) {
         NewTable.createNewDatabase(args[1]);
-        //Connect.connect();
         NewTable.createNewTable();
 
         Scanner scanner = new Scanner(System.in);
         UserVerification userVerification = new UserVerification();
-        //UserCard  card = null;
-        //String cardNumber = "";
         while (true) {
             System.out.println("1. Create an account");
             System.out.println("2. Log into account");
@@ -24,7 +21,6 @@ public class Main {
                 case 1:
                     UserCard newCard = new UserCard();
                     creatingAccount(newCard);
-                    //card = newCard;
                     break;
                 case 2:
                     userVerification.logging();

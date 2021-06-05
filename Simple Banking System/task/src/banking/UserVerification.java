@@ -20,7 +20,6 @@ public class UserVerification {
         actualCardNumber = scanner.nextLine();
         System.out.println("Enter your PIN:");
         String pinNumber = scanner.nextLine();
-       // System.out.println(card.getPinNumber());
 
         return appQ.isAccountDataValid(pinNumber, actualCardNumber);
     }

@@ -53,7 +53,7 @@ public class InsertApp {
                     + "WHERE number = ?";
 
         try (Connection conn = this.connect();
-             PreparedStatement pstmt = conn.prepareCall(sqlTransferFrom)) {
+             PreparedStatement pstmt = conn.prepareStatement(sqlTransferFrom)) {
             pstmt.setInt(1, amount);
             pstmt.setString(2, userCardNumber);
             pstmt.executeUpdate();
